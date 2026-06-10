@@ -1,0 +1,769 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pottery Glaze Materials Reference</title>
+<style>
+  :root {
+    --bg: #1a1410;
+    --surface: #231e19;
+    --card: #2c251f;
+    --border: #3d3028;
+    --accent: #c8860a;
+    --accent2: #7a9e8e;
+    --text: #e8ddd0;
+    --muted: #9a8c7e;
+    --highlight: #e8a830;
+    --tag-flux: #3d2a10;
+    --tag-flux-text: #e8a040;
+    --tag-color: #0f2a1a;
+    --tag-color-text: #5ec48a;
+    --tag-clay: #1a1030;
+    --tag-clay-text: #8888ee;
+    --tag-opac: #2a1010;
+    --tag-opac-text: #e06060;
+    --tag-additive: #1a2a1a;
+    --tag-additive-text: #80cc80;
+    --tag-frit: #1a1a2a;
+    --tag-frit-text: #80aacc;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Georgia', serif;
+    line-height: 1.7;
+    font-size: 15px;
+  }
+  header {
+    background: linear-gradient(135deg, #1a1410 0%, #2d1f0a 50%, #1a1410 100%);
+    border-bottom: 1px solid var(--accent);
+    padding: 2.5rem 2rem 2rem;
+    text-align: center;
+  }
+  header h1 {
+    font-size: 2rem;
+    color: var(--highlight);
+    letter-spacing: 0.05em;
+    font-style: italic;
+  }
+  header p {
+    color: var(--muted);
+    margin-top: 0.5rem;
+    font-size: 0.9rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+  .source-note {
+    font-size: 0.8rem;
+    color: var(--accent2);
+    margin-top: 0.5rem;
+  }
+  .search-bar {
+    max-width: 500px;
+    margin: 1.5rem auto 0;
+    position: relative;
+  }
+  .search-bar input {
+    width: 100%;
+    padding: 0.6rem 1rem;
+    background: var(--card);
+    border: 1px solid var(--border);
+    color: var(--text);
+    border-radius: 4px;
+    font-family: inherit;
+    font-size: 0.95rem;
+    outline: none;
+  }
+  .search-bar input:focus { border-color: var(--accent); }
+  .filter-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    justify-content: center;
+    padding: 1rem 2rem;
+    background: var(--surface);
+    border-bottom: 1px solid var(--border);
+  }
+  .filter-btn {
+    padding: 0.3rem 0.8rem;
+    border-radius: 20px;
+    border: 1px solid var(--border);
+    background: var(--card);
+    color: var(--muted);
+    cursor: pointer;
+    font-size: 0.8rem;
+    font-family: inherit;
+    transition: all 0.15s;
+  }
+  .filter-btn:hover, .filter-btn.active {
+    border-color: var(--accent);
+    color: var(--highlight);
+    background: var(--tag-flux);
+  }
+  main {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 2rem 1.5rem;
+  }
+  .section-header {
+    border-bottom: 1px solid var(--border);
+    padding-bottom: 0.5rem;
+    margin: 2rem 0 1rem;
+    font-size: 0.75rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 1.2rem;
+  }
+  .card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 1.2rem 1.4rem;
+    transition: border-color 0.15s;
+  }
+  .card:hover { border-color: var(--accent); }
+  .card.hidden { display: none; }
+  .card-head {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 0.5rem;
+    margin-bottom: 0.7rem;
+  }
+  .card-title {
+    font-size: 1rem;
+    font-weight: bold;
+    color: var(--highlight);
+  }
+  .card-alt {
+    font-size: 0.8rem;
+    color: var(--muted);
+    font-style: italic;
+    margin-top: 0.1rem;
+  }
+  .tags { display: flex; flex-wrap: wrap; gap: 0.3rem; margin-top: 0.3rem; }
+  .tag {
+    font-size: 0.7rem;
+    padding: 0.15rem 0.5rem;
+    border-radius: 3px;
+    font-family: monospace;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+  .tag.flux { background: var(--tag-flux); color: var(--tag-flux-text); }
+  .tag.colorant { background: var(--tag-color); color: var(--tag-color-text); }
+  .tag.clay { background: var(--tag-clay); color: var(--tag-clay-text); }
+  .tag.opacifier { background: var(--tag-opac); color: var(--tag-opac-text); }
+  .tag.additive { background: var(--tag-additive); color: var(--tag-additive-text); }
+  .tag.frit { background: var(--tag-frit); color: var(--tag-frit-text); }
+  .tag.silica-source { background: #1a2a10; color: #a0dd70; }
+  .desc { font-size: 0.88rem; color: var(--text); margin-bottom: 0.8rem; }
+  .sub-section { margin-top: 0.8rem; }
+  .sub-title {
+    font-size: 0.72rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--accent2);
+    margin-bottom: 0.3rem;
+  }
+  .sub-text { font-size: 0.83rem; color: var(--muted); }
+  .formula-box {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-left: 3px solid var(--accent2);
+    border-radius: 3px;
+    padding: 0.5rem 0.8rem;
+    font-size: 0.8rem;
+    color: var(--accent2);
+    font-family: monospace;
+    margin-top: 0.4rem;
+    white-space: pre-wrap;
+  }
+  .chem-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.78rem;
+    margin-top: 0.4rem;
+  }
+  .chem-table td {
+    padding: 0.25rem 0.5rem;
+    border-bottom: 1px solid var(--border);
+    color: var(--muted);
+  }
+  .chem-table td:first-child { color: var(--text); font-weight: bold; }
+  #no-results {
+    text-align: center;
+    padding: 3rem;
+    color: var(--muted);
+    display: none;
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>Pottery Glaze Materials Reference</h1>
+  <p>Function · Substitutes · Conversion Equations</p>
+  <div class="source-note">Primary source: digitalfire.com by Tony Hansen</div>
+  <div class="search-bar">
+    <input type="text" id="search" placeholder="Search materials…" oninput="filterCards()">
+  </div>
+</header>
+
+<div class="filter-row">
+  <button class="filter-btn active" onclick="setFilter('all', this)">All</button>
+  <button class="filter-btn" onclick="setFilter('flux', this)">Fluxes</button>
+  <button class="filter-btn" onclick="setFilter('colorant', this)">Colorants</button>
+  <button class="filter-btn" onclick="setFilter('clay', this)">Clays</button>
+  <button class="filter-btn" onclick="setFilter('frit', this)">Frits</button>
+  <button class="filter-btn" onclick="setFilter('opacifier', this)">Opacifiers</button>
+  <button class="filter-btn" onclick="setFilter('additive', this)">Additives</button>
+  <button class="filter-btn" onclick="setFilter('silica-source', this)">Silica Sources</button>
+</div>
+
+<main>
+<div class="grid" id="grid">
+
+<!-- ALBERTA SLIP -->
+<div class="card" data-tags="clay flux">
+  <div class="card-head">
+    <div>
+      <div class="card-title">Alberta Slip</div>
+      <div class="card-alt">Archie Bray Slip · Albany Slip substitute</div>
+    </div>
+  </div>
+  <div class="tags"><span class="tag clay">clay</span><span class="tag flux">flux</span></div>
+  <div class="desc" style="margin-top:0.7rem">A blended low-melting, iron-stained clay formulated as a physical and chemical substitute for the discontinued Albany Slip. By itself (raw:calcined mix) it melts to a dark chocolate-brown glossy glaze at cone 10R. At cone 6 it works as a base for a wide range of glazes with a frit addition. Its plasticity helps suspend glaze slurries, but above ~40% raw you must use a calcine:raw mix to prevent cracking.</div>
+  <div class="sub-section">
+    <div class="sub-title">Key Oxides Supplied</div>
+    <div class="sub-text">SiO₂ (53.5%), Al₂O₃ (15.2%), Fe₂O₃ (4.5%), K₂O (3.5%), MgO (3.9%), CaO (5.9%), Na₂O (2.2%)</div>
+  </div>
+  <div class="sub-section">
+    <div class="sub-title">Substitute</div>
+    <div class="sub-text">Albany Slip (discontinued). Alberta Slip has slightly lower iron — compensate by adding ~1–2% Red Iron Oxide. Because Alberta Slip is more plastic than Albany, use a 50:50 calcine:raw ratio when more than ~40% is in a recipe.</div>
+  </div>
+</div>
+
+<!-- BENTONITE -->
+<div class="card" data-tags="clay additive">
+  <div class="card-head"><div><div class="card-title">Bentonite</div></div></div>
+  <div class="tags"><span class="tag clay">clay</span><span class="tag additive">additive</span></div>
+  <div class="desc" style="margin-top:0.7rem">A super-plastic sodium smectite clay added in small amounts (1–3%) to glazes and bodies. Its extremely fine particle size and high surface area make it the most powerful suspending agent available — it keeps heavy particles from settling. It also thickens and gels slurries, slows drying, and hardens the dried glaze layer. Not used for its chemistry.</div>
+  <div class="sub-section">
+    <div class="sub-title">Substitute</div>
+    <div class="sub-text">Veegum T / Macaloid (hectorite clays) — cleaner white color, used at similar percentages. CMC Gum for suspension/adhesion (different mechanism). EPK kaolin at 15–20% for suspension without excessive plasticity.</div>
+  </div>
+</div>
+
+<!-- CALCINED KAOLIN -->
+<div class="card" data-tags="clay">
+  <div class="card-head"><div><div class="card-title">Calcined Kaolin</div></div></div>
+  <div class="tags"><span class="tag clay">clay</span></div>
+  <div class="desc" style="margin-top:0.7rem">Raw kaolin that has been fired (calcined) to drive off chemically-bound water, eliminating its plasticity and shrinkage. Added to glaze recipes containing large amounts of raw clay (e.g. Alberta Slip, EPK-heavy glazes) to reduce drying shrinkage and prevent cracking/crawling, while still supplying Al₂O₃ and SiO₂ to the melt.</div>
+  <div class="sub-section">
+    <div class="sub-title">Conversion from Raw Kaolin</div>
+    <div class="sub-text">Kaolin loses ~12% weight on calcination (LOI ~12%). To replace raw kaolin with calcined, use 12% less calcined. Or: multiply the raw amount by 0.88 to get the calcined equivalent. In practice, a 50:50 raw:calcine blend is the standard starting point.</div>
+    <div class="formula-box">Calcined amount = Raw amount × (1 − LOI)
+e.g. 20g raw EPK → 20 × 0.88 = 17.6g calcined</div>
+  </div>
+</div>
+
+<!-- CHROME OXIDE -->
+<div class="card" data-tags="colorant">
+  <div class="card-head"><div><div class="card-title">Chrome Oxide</div><div class="card-alt">Cr₂O₃</div></div></div>
+  <div class="tags"><span class="tag colorant">colorant</span></div>
+  <div class="desc" style="margin-top:0.7rem">A very refractory, opaque army-green colorant. Even a 50% mix with a high-boron frit barely begins to melt. Typically only 1–2% is needed for a dark color. Produces green in most glazes, brown in zinc-bearing glazes, and can cause intense pink/red when combined with tin oxide. Chrome gases at high temperatures (above cone 6) and can migrate to neighboring pieces in a firing.</div>
+  <div class="sub-section">
+    <div class="sub-title">Notes</div>
+    <div class="sub-text">No direct weight-for-weight substitute. For softer greens, iron oxide + cobalt combinations can approximate some tones. Avoid using chrome in the same firing as tin-glazed work unless pink flashing is desired.</div>
+  </div>
+</div>
+
+<!-- OM4 BALL CLAY -->
+<div class="card" data-tags="clay">
+  <div class="card-head"><div><div class="card-title">OM4 Ball Clay</div></div></div>
+  <div class="tags"><span class="tag clay">clay</span></div>
+  <div class="desc" style="margin-top:0.7rem">A fine-grained, highly plastic ball clay widely used in glaze recipes to provide suspension, slurry thixotropy, and dry hardness. Supplies Al₂O₃ and SiO₂ to the fired glaze. Fires cream/tan due to slightly higher iron than kaolin. Typically used at 10–20% in glazes. Interchangeable with other ball clays (Old Hickory #5, XX Sagger) for most glaze applications.</div>
+  <div class="sub-section">
+    <div class="sub-title">Substitute</div>
+    <div class="sub-text">Other ball clays (Old Hickory #5, XX Sagger) on a 1:1 weight basis — minor fired-color differences may result. EPK or Grolleg kaolin for whiter results (expect reduced suspension, may need bentonite addition).</div>
+  </div>
+</div>
+
+<!-- DIAMOND / EPK KAOLIN -->
+<div class="card" data-tags="clay">
+  <div class="card-head"><div><div class="card-title">Diamond Kaolin / EPK</div><div class="card-alt">Edgar Plastic Kaolin</div></div></div>
+  <div class="tags"><span class="tag clay">clay</span></div>
+  <div class="desc" style="margin-top:0.7rem">EPK is the most widely used kaolin in North American pottery glazes. It supplies Al₂O₃ and SiO₂, suspends slurries (15–20% is sufficient), and hardens the dried glaze layer. It is sticky and thixotropic, giving good slurry properties. Fires white. Diamond Kaolin is similar in role. Both have a ~12% LOI from chemically-bound water.</div>
+  <div class="sub-section">
+    <div class="sub-title">Substitute</div>
+    <div class="sub-text">Grolleg or New Zealand kaolin for cleaner/whiter results with similar suspension. OM4 ball clay for stronger suspension but warmer fired color. Calcined Kaolin to replace part of raw EPK to reduce crawling risk.</div>
+  </div>
+</div>
+
+<!-- COBALT CARBONATE -->
+<div class="card" data-tags="colorant">
+  <div class="card-head"><div><div class="card-title">Cobalt Carbonate</div><div class="card-alt">CoCO₃</div></div></div>
+  <div class="tags"><span class="tag colorant">colorant</span></div>
+  <div class="desc" style="margin-top:0.7rem">A fine reddish-violet powder that fires to deep blue in both oxidation and reduction. Disperses more evenly than cobalt oxide, producing smoother, more uniform blue. Because it is less concentrated, it is less prone to the spotting/blistering that cobalt oxide can produce. Typical use: 0.25–2%. It is an extremely active melter in fluid glazes.</div>
+  <div class="sub-section">
+    <div class="sub-title">Substitute for Cobalt Oxide</div>
+    <div class="sub-text">Cobalt oxide (Co₃O₄) contains ~93% CoO; carbonate contains ~63% CoO.</div>
+    <div class="formula-box">Carbonate → Oxide: multiply by 63 ÷ 93 = × 0.677
+Oxide → Carbonate: multiply by 93 ÷ 63 = × 1.476
+e.g. 1g cobalt oxide ≈ 1.48g cobalt carbonate</div>
+  </div>
+</div>
+
+<!-- COBALT OXIDE -->
+<div class="card" data-tags="colorant">
+  <div class="card-head"><div><div class="card-title">Cobalt Oxide</div><div class="card-alt">Co₃O₄ / CoO</div></div></div>
+  <div class="tags"><span class="tag colorant">colorant</span></div>
+  <div class="desc" style="margin-top:0.7rem">The most powerful blue colorant in ceramics. Produces strong blue in oxidation and reduction, purple/pink in the presence of MgO in oxidation. Very intense — use 0.25–1% for mid blues, up to 2% for deep tones. Can cause speckling or blistering if not ground fine. Extremely active flux when used in higher amounts.</div>
+  <div class="sub-section">
+    <div class="sub-title">Substitute for Cobalt Carbonate</div>
+    <div class="formula-box">Oxide → Carbonate: multiply by 93 ÷ 63 = × 1.476
+e.g. 0.5g cobalt oxide → use 0.74g cobalt carbonate</div>
+  </div>
+</div>
+
+<!-- COPPER CARBONATE -->
+<div class="card" data-tags="colorant">
+  <div class="card-head"><div><div class="card-title">Copper Carbonate</div><div class="card-alt">CuCO₃ (basic)</div></div></div>
+  <div class="tags"><span class="tag colorant">colorant</span></div>
+  <div class="desc" style="margin-top:0.7rem">Fine pale green powder; produces uniform green color in oxidation glazes, vibrant copper-red in reduction. More evenly dispersed than copper oxide. Begins gassing around 1500°F — this early off-gassing can be implicated in glaze blistering. Volatile above 1025°C; copper fumes can affect other glazes in the kiln. Typical use: 1–5%.</div>
+  <div class="sub-section">
+    <div class="sub-title">Substitute for Copper Oxide Black</div>
+    <div class="sub-text">Copper oxide (CuO) contains ~89% CuO; basic copper carbonate contains ~57% CuO.</div>
+    <div class="formula-box">Carbonate → Oxide: multiply by ~0.64
+Oxide → Carbonate: multiply by ~1.56
+(Always fine-tune based on fired results)</div>
+  </div>
+</div>
+
+<!-- COPPER OXIDE BLACK -->
+<div class="card" data-tags="colorant">
+  <div class="card-head"><div><div class="card-title">Copper Oxide Black</div><div class="card-alt">CuO</div></div></div>
+  <div class="tags"><span class="tag colorant">colorant</span></div>
+  <div class="desc" style="margin-top:0.7rem">The most stable form of oxidized copper. Produces green at 1–5%, moving toward black at higher amounts. In reduction it yields vibrant copper-red. The oxide form can produce speckled color effects vs. the carbonate's even dispersion. An extremely powerful flux in fluid glazes — 50% with a borax frit will dissolve a firebrick at cone 6. Volatile above 1025°C.</div>
+  <div class="sub-section">
+    <div class="sub-title">Substitute for Copper Carbonate</div>
+    <div class="formula-box">Oxide → Carbonate: multiply by ~1.56
+e.g. 1g copper oxide → ~1.56g copper carbonate</div>
+  </div>
+</div>
+
+<!-- CORNWALL STONE -->
+<div class="card" data-tags="flux silica-source">
+  <div class="card-head"><div><div class="card-title">Cornwall Stone</div></div></div>
+  <div class="tags"><span class="tag flux">flux</span><span class="tag silica-source">silica source</span></div>
+  <div class="desc" style="margin-top:0.7rem">A complex low-iron feldspathic stone from Cornwall, UK containing a diverse mix of fluxes (K₂O, Na₂O, CaO, MgO) plus high silica. Historically used as a flux in clay bodies and glazes. Melts at 1150–1300°C. No longer consistently available; synthetic substitutes exist. Has one of the highest silica contents of any feldspar-type material.</div>
+  <div class="sub-section">
+    <div class="sub-title">Substitute</div>
+    <div class="sub-text">H&G Cornwall Stone (synthetic blend). Nepheline Syenite + Minspar as a calculated blend. Digitalfire's L3617 recipe is a calculated substitute. No 1:1 weight substitute — use chemistry software (Insight-Live) to match the UMF.</div>
+  </div>
+</div>
+
+<!-- DOLOMITE -->
+<div class="card" data-tags="flux">
+  <div class="card-head"><div><div class="card-title">Dolomite</div></div></div>
+  <div class="tags"><span class="tag flux">flux</span></div>
+  <div class="desc" style="margin-top:0.7rem">Calcium magnesium carbonate (CaCO₃·MgCO₃). The primary source of MgO in high-temperature raw glazes alongside talc. "Dolomite matte" glazes are prized for their silky, pleasant surface. Refractory by itself but enters the melt readily when combined with boron and other fluxes. Has significant LOI (CO₂ off-gassing) during firing, which can cause bubbles.</div>
+  <div class="sub-section">
+    <div class="sub-title">Substitute</div>
+    <div class="sub-text">Whiting (for CaO portion) + Talc or Magnesium Carbonate (for MgO portion) — requires chemistry calculation to match proportions. Using a frit to source MgO avoids the gassing problem. Wollastonite can replace the CaO portion.</div>
+  </div>
+</div>
+
+<!-- G200 POTASH FELDSPAR -->
+<div class="card" data-tags="flux silica-source">
+  <div class="card-head"><div><div class="card-title">G-200 Potash Feldspar</div><div class="card-alt">Mahavir Potash · G200 HP</div></div></div>
+  <div class="tags"><span class="tag flux">flux</span><span class="tag silica-source">silica source</span></div>
+  <div class="desc" style="margin-top:0.7rem">A high-quality potassium alumina silicate feldspar. Supplies K₂O (flux), Al₂O₃ (stability), and SiO₂ (glass-former). The standard potash feldspar for North American potters for decades. Now discontinued — the ore body was exhausted in 2013. Mahavir Potash (from India) and Custer Feldspar are current substitutes for most recipes.</div>
+  <div class="sub-section">
+    <div class="sub-title">Substitute</div>
+    <div class="sub-text">Mahavir Potash (Laguna's current import) is the primary substitute. G200 HP + Minspar blend: 70% G200HP : 30% Minspar 200 closely matches old G200 chemistry. Custer Feldspar is also interchangeable for most applications on a 1:1 basis.</div>
+    <div class="formula-box">G200 substitute blend:
+70 parts G200 HP + 30 parts Minspar 200
+(Laguna "Old Blend" formula)</div>
+  </div>
+</div>
+
+<!-- MINSPAR 200 / F-4 SODA FELDSPAR -->
+<div class="card" data-tags="flux silica-source">
+  <div class="card-head"><div><div class="card-title">Minspar 200 / F-4 Soda Feldspar</div></div></div>
+  <div class="tags"><span class="tag flux">flux</span><span class="tag silica-source">silica source</span></div>
+  <div class="desc" style="margin-top:0.7rem">A 200-mesh flotation-grade sodium feldspar from Spruce Pine, NC. Supplies Na₂O and K₂O (fluxes), Al₂O₃, and SiO₂. Very low iron content makes it ideal for white porcelains. F-4 is discontinued; Minspar 200 has virtually identical chemistry and is the direct replacement. High thermal expansion means high-feldspar glazes tend to craze.</div>
+  <div class="sub-section">
+    <div class="sub-title">Substitute for F-4</div>
+    <div class="sub-text">1:1 substitution for F-4. Also used 1:1 in most recipes calling for soda feldspar. Nepheline Syenite melts more readily and has more Al₂O₃ — use chemistry calculation if substituting.</div>
+  </div>
+</div>
+
+<!-- FRIT 3124 / F-19 -->
+<div class="card" data-tags="frit flux">
+  <div class="card-head"><div><div class="card-title">Frit 3124 / F-19</div><div class="card-alt">Ferro Frit 3124 · Fusion F-19</div></div></div>
+  <div class="tags"><span class="tag frit">frit</span><span class="tag flux">flux</span></div>
+  <div class="desc" style="margin-top:0.7rem">A boron-bearing, balanced-chemistry glossy frit. Contains B₂O₃ (melter), CaO, Na₂O, Al₂O₃, and SiO₂. A workhorse glaze base — add 10–15% kaolin for a complete cone 04 glaze. B₂O₃ provides low-expansion flux unavailable from raw materials. More Al₂O₃ and less B₂O₃ than Frit 3134 — does not melt as freely. Fires to a glossy, durable surface.</div>
+  <div class="sub-section">
+    <div class="sub-title">Substitute</div>
+    <div class="sub-text">Frit 3195 is closer in melt character. Frit 3134 cannot be directly substituted 1:1 — 3124 has more Al₂O₃ and less B₂O₃ and melts significantly less. Use Insight-Live to recalculate if substituting between these frits.</div>
+  </div>
+</div>
+
+<!-- FRIT 3134 / F-12 -->
+<div class="card" data-tags="frit flux">
+  <div class="card-head"><div><div class="card-title">Frit 3134 / F-12</div><div class="card-alt">Ferro Frit 3134 · Fusion F-12</div></div></div>
+  <div class="tags"><span class="tag frit">frit</span><span class="tag flux">flux</span></div>
+  <div class="desc" style="margin-top:0.7rem">High-boron, low-alumina frit. The most widely used frit by studio potters. Similar to 3124 but without Al₂O₃ — use where the glaze already has sufficient clay. B₂O₃ makes it a powerful, early-melting flux. Used to kick-start melting in Alberta Slip and other base glazes, fix pinholes, and lower firing temperature.</div>
+  <div class="sub-section">
+    <div class="sub-title">Substitute</div>
+    <div class="sub-text">Frit 3195 is the closest in melt behavior (higher B₂O₃ than 3124, has Al₂O₃). Frit 3124 does not melt nearly as well — if substituting, increase amount and reduce kaolin/silica. Requires chemistry calculation — no simple 1:1 swap.</div>
+    <div class="formula-box">Rough guide (low-clay glaze):
+Increase 3124 amount, reduce silica & kaolin
+until B₂O₃ matches. Use Insight-Live.</div>
+  </div>
+</div>
+
+<!-- FRIT 3110 / F-75 -->
+<div class="card" data-tags="frit flux">
+  <div class="card-head"><div><div class="card-title">Frit 3110 / F-75</div><div class="card-alt">Ferro Frit 3110 · Fusion F-75</div></div></div>
+  <div class="tags"><span class="tag frit">frit</span><span class="tag flux">flux</span></div>
+  <div class="desc" style="margin-top:0.7rem">A man-made low-Al₂O₃ "super feldspar." High in sodium (Na₂O), which gives it high thermal expansion — useful for deliberately crazing glazes or for high-expansion bodies. Works well in clay bodies and as a partial feldspar substitute. Very fluid melter that runs easily at high temperatures.</div>
+  <div class="sub-section">
+    <div class="sub-title">Use</div>
+    <div class="sub-text">Used to add Na₂O and aid melting when K₂O from feldspar is not desired. No 1:1 substitute — compare UMF chemistry if switching. F-75 (Fusion Frits) is the Canadian equivalent of 3110.</div>
+  </div>
+</div>
+
+<!-- FRIT 3195 / F-2 -->
+<div class="card" data-tags="frit flux">
+  <div class="card-head"><div><div class="card-title">Frit 3195 / F-2</div><div class="card-alt">Ferro 3195 · Fusion F-2</div></div></div>
+  <div class="tags"><span class="tag frit">frit</span><span class="tag flux">flux</span></div>
+  <div class="desc" style="margin-top:0.7rem">A silky-matte balanced frit with moderate B₂O₃ and Al₂O₃. Used as a base for cone 04 glazes (with 10–15% kaolin), or in higher-fire glazes to add flux. Fires to a softer, silkier surface than 3124. Better melter than 3124 but not as aggressive as 3134. Often used in combination with 3110.</div>
+  <div class="sub-section">
+    <div class="sub-title">Substitute</div>
+    <div class="sub-text">Closest alternative to Frit 3134 when used as a boron source. F-2 (Fusion Frits) is the Canadian market equivalent of 3195.</div>
+  </div>
+</div>
+
+<!-- GILLESPIE BORATE -->
+<div class="card" data-tags="flux">
+  <div class="card-head"><div><div class="card-title">Gillespie Borate</div></div></div>
+  <div class="tags"><span class="tag flux">flux</span></div>
+  <div class="desc" style="margin-top:0.7rem">A natural calcium borate mineral (similar to Gerstley Borate but more consistent). Supplies B₂O₃ and CaO. Behaves differently from boron frits — shrinks dramatically during heating, then suddenly becomes highly fluid between 1600–1650°F as borate phases break down. This sudden melting can disrupt a glaze if timing is wrong. More consistent batch-to-batch than Gerstley Borate.</div>
+  <div class="sub-section">
+    <div class="sub-title">Substitute</div>
+    <div class="sub-text">Ferro Frit 3134 (chemistry calculation required — no 1:1 swap). Frit delivers boron more gradually and cleanly without sudden melting or excessive gassing. Ulexite is another natural borate substitute.</div>
+  </div>
+</div>
+
+<!-- CMC GUM -->
+<div class="card" data-tags="additive">
+  <div class="card-head"><div><div class="card-title">CMC Gum</div><div class="card-alt">Carboxymethylcellulose</div></div></div>
+  <div class="tags"><span class="tag additive">additive</span></div>
+  <div class="desc" style="margin-top:0.7rem">A water-soluble cellulose gum that acts as a glaze binder. Added at 0.5–1% (dissolved in hot water first) to slow drying, improve adhesion to bisqueware, harden the dried glaze layer, and enable multi-layer dipping without cracking. Burns out completely during firing, leaving no residue in the fired glaze. Essential for brushing glazes and for thick or multi-layered dipping applications.</div>
+  <div class="sub-section">
+    <div class="sub-title">Substitute</div>
+    <div class="sub-text">Gum Arabic (similar binder, may mold more quickly). Veegum T for suspension/gelling (different mechanism, remains in fired glaze as part of clay chemistry). No direct 1:1 substitute for all its properties.</div>
+  </div>
+</div>
+
+<!-- RED IRON OXIDE -->
+<div class="card" data-tags="colorant flux">
+  <div class="card-head"><div><div class="card-title">Red Iron Oxide</div><div class="card-alt">Fe₂O₃ · Hematite</div></div></div>
+  <div class="tags"><span class="tag colorant">colorant</span><span class="tag flux">flux</span></div>
+  <div class="desc" style="margin-top:0.7rem">The most versatile and affordable ceramic colorant. In oxidation: tan at 1–2%, amber at 5%, opaque brown/black at 8–11%, iron crystal (tenmoku gold) at 13%+. In reduction: celadon green at low %, deep amber, brown, and metallic black at higher %. Also acts as a flux. Works with titanium/rutile for spectacular variegated surfaces. Very safe material to handle.</div>
+  <div class="sub-section">
+    <div class="sub-title">Substitute</div>
+    <div class="sub-text">Barnard/Blackbird Slip as a clay-based iron source (also suspends). Redart at low fire for iron effects. Yellow Ochre (hydrated iron oxide) — supplies some iron but fires differently. No direct 1:1 substitute that matches both coloring and fluxing behavior.</div>
+  </div>
+</div>
+
+<!-- ILMENITE -->
+<div class="card" data-tags="colorant">
+  <div class="card-head"><div><div class="card-title">Ilmenite</div><div class="card-alt">FeTiO₃</div></div></div>
+  <div class="tags"><span class="tag colorant">colorant</span></div>
+  <div class="desc" style="margin-top:0.7rem">A black iron-titanium ore (iron > 15% content; below 15% is called rutile). Ground ilmenite in granular form is added to glazes to produce dark specks and texture. The combination of iron and titanium produces variegated, mottled, or speckled surfaces. Coarser grinds produce more visible speckling. Related to rutile — both contribute similar iron/titanium color effects.</div>
+  <div class="sub-section">
+    <div class="sub-title">Substitute</div>
+    <div class="sub-text">Rutile (for titanium/iron texture without as much speckling). A combination of Red Iron Oxide + Rutile approximates ilmenite's chemistry but may not replicate the granular speck effect.</div>
+  </div>
+</div>
+
+<!-- LITHIUM CARBONATE -->
+<div class="card" data-tags="flux">
+  <div class="card-head"><div><div class="card-title">Lithium Carbonate</div><div class="card-alt">Li₂CO₃</div></div></div>
+  <div class="tags"><span class="tag flux">flux</span></div>
+  <div class="desc" style="margin-top:0.7rem">A powerful alkaline flux supplying Li₂O. Lowers melting temperature, reduces thermal expansion (lower than soda or potash), and lowers glaze viscosity. Can produce brilliant gloss and intensifies certain colorants. Has an LOI of ~40% (CO₂ off-gassing). Expensive and increasingly scarce due to battery industry demand. Soluble lithium frits avoid the gassing problem.</div>
+  <div class="sub-section">
+    <div class="sub-title">Substitute</div>
+    <div class="sub-text">Spodumene (lithium feldspar) — supplies Li₂O along with Al₂O₃ and SiO₂; less soluble; melts better as a combined mineral. Lithium frit (e.g. Ferro 3249 region) — no LOI gassing. Chemistry calculation required for any substitution.</div>
+  </div>
+</div>
+
+<!-- MAGNESIUM CARBONATE -->
+<div class="card" data-tags="flux">
+  <div class="card-head"><div><div class="card-title">Magnesium Carbonate</div><div class="card-alt">MgCO₃ · Magnesite</div></div></div>
+  <div class="tags"><span class="tag flux">flux</span></div>
+  <div class="desc" style="margin-top:0.7rem">Supplies MgO — a refractory material at low temperatures but an active secondary flux at high fire. MgO in quantities of ~0.35 mol or more produces silky matte surfaces. Magnesium carbonate is an extremely light, fluffy powder with high LOI. Used in small amounts for matte effects, but its refractory nature at lower temps means it can produce a "crowbar matte" by not fully melting. Creates pleasant satin surfaces in dolomite/talc-type glazes.</div>
+  <div class="sub-section">
+    <div class="sub-title">Substitute</div>
+    <div class="sub-text">Talc or Dolomite are the common MgO sources. Talc has lower LOI and is a better melter in lower-fire applications. Chemistry calculation needed to match MgO levels.</div>
+  </div>
+</div>
+
+<!-- NEPHELINE SYENITE -->
+<div class="card" data-tags="flux silica-source">
+  <div class="card-head"><div><div class="card-title">Nepheline Syenite</div></div></div>
+  <div class="tags"><span class="tag flux">flux</span><span class="tag silica-source">silica source</span></div>
+  <div class="desc" style="margin-top:0.7rem">A type of feldspar with more alumina and stronger melting power than potash or soda feldspars. The champion melter among feldspars at cone 6. Supplies K₂O + Na₂O (as KNaO), Al₂O₃, and SiO₂. Very consistent Canadian material with extremely low iron content. Because of its higher Al₂O₃, substituting it into recipes lowers firing temperature while increasing alumina.</div>
+  <div class="sub-section">
+    <div class="sub-title">Substitute for Soda Feldspar</div>
+    <div class="sub-text">Not a direct 1:1 weight sub. Nepheline syenite melts more readily than most feldspars. When substituting for Minspar/F-4, reduce the amount by ~10–15% and add a small silica correction, or add 3–5% frit to compensate for increased melting. Best done with chemistry software.</div>
+  </div>
+</div>
+
+<!-- REDART -->
+<div class="card" data-tags="clay flux colorant">
+  <div class="card-head"><div><div class="card-title">Redart</div></div></div>
+  <div class="tags"><span class="tag clay">clay</span><span class="tag flux">flux</span><span class="tag colorant">colorant</span></div>
+  <div class="desc" style="margin-top:0.7rem">A red-burning earthenware clay used primarily at low fire (cone 04–02). Rich in iron oxide and fluxes, it self-glazes and vitrifies at earthenware temperatures. Produces vivid red/orange color in oxidation at low fire. At high fire, the fluxes in the clay fuse the iron to a darker brown/black. Often used as 70–90% of a red earthenware body. Aids glaze fit at low temperatures due to its higher thermal expansion.</div>
+  <div class="sub-section">
+    <div class="sub-title">Substitute</div>
+    <div class="sub-text">Other red earthenware clays (local red clays, C-Red). No perfect 1:1 substitute as chemistry varies. For high-fire red effects, C-Red Clay is more refractory.</div>
+  </div>
+</div>
+
+<!-- RUTILE -->
+<div class="card" data-tags="colorant">
+  <div class="card-head"><div><div class="card-title">Rutile</div><div class="card-alt">Natural TiO₂</div></div></div>
+  <div class="tags"><span class="tag colorant">colorant</span></div>
+  <div class="desc" style="margin-top:0.7rem">An impure natural titanium dioxide (up to 15% iron and trace contaminants). Produces mottled, variegated, and crystalline surfaces. Interferes with other colorants to create complex effects — with iron produces spectacular variegated oranges and golds. Promotes crystal growth during cooling. Does not melt on its own (very refractory). Grades with more iron contamination fire darker.</div>
+  <div class="sub-section">
+    <div class="sub-title">Substitute</div>
+    <div class="sub-text">Pure TiO₂ (titanium dioxide) — cleaner, less variegation. Ilmenite for more speckled/darker iron-titanium effects. No substitute fully replicates rutile's specific color variegation character.</div>
+  </div>
+</div>
+
+<!-- FLINT / SILICA -->
+<div class="card" data-tags="silica-source">
+  <div class="card-head"><div><div class="card-title">Flint / Silica</div><div class="card-alt">SiO₂ · Quartz</div></div></div>
+  <div class="tags"><span class="tag silica-source">silica source</span></div>
+  <div class="desc" style="margin-top:0.7rem">Pure silicon dioxide — the primary glass-former in all glazes. Raises firing temperature, improves durability, hardness, and scratch resistance, and lowers thermal expansion. Refractory particles that must dissolve into the glaze melt. Flint (from chalk) and quartz/silica (from sandstone) are chemically equivalent in the fired glaze, though flint is slightly finer and more reactive.</div>
+  <div class="sub-section">
+    <div class="sub-title">Substitute</div>
+    <div class="sub-text">Flint and silica/quartz are interchangeable 1:1 by weight for chemistry purposes. Minor differences in particle reactivity exist but are not usually significant at normal firing temperatures. Wollastonite can substitute for part of the silica when also replacing whiting.</div>
+  </div>
+</div>
+
+<!-- SPODUMENE -->
+<div class="card" data-tags="flux silica-source">
+  <div class="card-head"><div><div class="card-title">Spodumene</div><div class="card-alt">Lithium Feldspar · LiAlSi₂O₆</div></div></div>
+  <div class="tags"><span class="tag flux">flux</span><span class="tag silica-source">silica source</span></div>
+  <div class="desc" style="margin-top:0.7rem">A natural lithium aluminum silicate mineral — the "lithium feldspar." Supplies Li₂O (powerful flux), Al₂O₃, and SiO₂ in a single mineral package. Because these are combined in crystalline form, it melts better than an equivalent mixture of lithium carbonate + kaolin + silica. Only slightly soluble (safer than lithium carbonate). Lowers thermal expansion and viscosity of the glaze melt.</div>
+  <div class="sub-section">
+    <div class="sub-title">Substitute for Lithium Carbonate</div>
+    <div class="sub-text">Chemistry calculation required. Spodumene has ~8% Li₂O; lithium carbonate is ~40% Li₂O. Must also account for the Al₂O₃ and SiO₂ spodumene introduces. Use Insight-Live to recalculate.</div>
+  </div>
+</div>
+
+<!-- STRONTIUM CARBONATE -->
+<div class="card" data-tags="flux">
+  <div class="card-head"><div><div class="card-title">Strontium Carbonate</div><div class="card-alt">SrCO₃</div></div></div>
+  <div class="tags"><span class="tag flux">flux</span></div>
+  <div class="desc" style="margin-top:0.7rem">Supplies SrO — a high-temperature flux with unique color response properties, particularly promoting beautiful microcrystalline satin-matte surfaces. SrO behaves similarly to BaO (barium carbonate) but is less toxic. Has significant LOI from CO₂ off-gassing during firing, which can cause micro-bubble entrapment in the glaze. High surface tension in the melt can resist crawling.</div>
+  <div class="sub-section">
+    <div class="sub-title">Substitute</div>
+    <div class="sub-text">Barium carbonate (similar surface/chemistry, more toxic). Whiting (CaO) is a partial substitute for SrO chemically but loses unique strontium color responses. No direct 1:1 substitute — chemistry calculation required.</div>
+  </div>
+</div>
+
+<!-- TALC -->
+<div class="card" data-tags="flux">
+  <div class="card-head"><div><div class="card-title">Talc</div></div></div>
+  <div class="tags"><span class="tag flux">flux</span></div>
+  <div class="desc" style="margin-top:0.7rem">Hydrated magnesium silicate (Mg₃Si₄O₁₀(OH)₂). Supplies MgO and SiO₂. The primary MgO source at low and mid temperatures, where it is a better melter than dolomite. At cone 6 and above, MgO from talc produces silky matte surfaces. Also used in low-fire bodies to raise thermal expansion for commercial glaze fit. Has modest LOI.</div>
+  <div class="sub-section">
+    <div class="sub-title">Substitute</div>
+    <div class="sub-text">Dolomite (supplies both MgO and CaO — chemistry calculation required). Magnesium Carbonate (pure MgO source, very fluffy, high LOI). Frit (for MgO without gassing). No 1:1 weight substitute — recalculate by MgO equivalents.</div>
+  </div>
+</div>
+
+<!-- TIN OXIDE -->
+<div class="card" data-tags="opacifier">
+  <div class="card-head"><div><div class="card-title">Tin Oxide</div><div class="card-alt">SnO₂</div></div></div>
+  <div class="tags"><span class="tag opacifier">opacifier</span></div>
+  <div class="desc" style="margin-top:0.7rem">The classic glaze opacifier, producing brilliant, very white opacity. Only 4–8% needed (vs. 8–15% for zircon). Creates whiter, glossier surfaces than zircon. Does not cause cutlery marking or reduce thermal expansion significantly. Less likely to cause crawling. Expensive — roughly 3–5× the cost of zircon opacifiers. Reacts with chrome oxide to produce pink/red colors (important to know if both are in the kiln).</div>
+  <div class="sub-section">
+    <div class="sub-title">Substitute</div>
+    <div class="sub-text">Zircopax/Ultrox/Superpax at roughly twice the percentage. Titanium dioxide as a partial substitute (slightly different character). A mix of 3% tin + 5% zircon is a cost-effective combination for tableware.</div>
+    <div class="formula-box">Tin → Zircon: roughly double the amount
+(5% tin ≈ 10% Zircopax, fine-tune by test)</div>
+  </div>
+</div>
+
+<!-- ULTROX / ZIRCOPAX / SUPERPAX -->
+<div class="card" data-tags="opacifier">
+  <div class="card-head"><div><div class="card-title">Ultrox / Zircopax / Superpax</div><div class="card-alt">Zirconium Silicate · ZrSiO₄</div></div></div>
+  <div class="tags"><span class="tag opacifier">opacifier</span></div>
+  <div class="desc" style="margin-top:0.7rem">Brand names for zirconium silicate (zircon). The most economical glaze opacifier. Typical use: 8–12% for good opacity, up to 15% for maximum. Finer particle sizes (Ultrox 500W, 1000W) give greater whitening power. Can cause cutlery marking (hard surface scratches metal). High amounts stiffen the glaze melt and can increase crawling risk. Lowers thermal expansion slightly.</div>
+  <div class="sub-section">
+    <div class="sub-title">Substitute</div>
+    <div class="sub-text">Tin oxide at roughly half the percentage. All three brands (Ultrox, Zircopax, Superpax) are interchangeable — match by particle size for equivalent opacity. Titanium dioxide gives a warmer, more textured white.</div>
+  </div>
+</div>
+
+<!-- WHITING -->
+<div class="card" data-tags="flux">
+  <div class="card-head"><div><div class="card-title">Whiting</div><div class="card-alt">Calcium Carbonate · CaCO₃</div></div></div>
+  <div class="tags"><span class="tag flux">flux</span></div>
+  <div class="desc" style="margin-top:0.7rem">The most common source of CaO in high-fire glazes. CaO is a primary high-temperature flux that produces hard, durable, acid-resistant glass. At lower CaO levels it promotes glossy surfaces; at high levels it can produce mattes. Whiting is a carbonate with high LOI (~44%) — CO₂ off-gassing during firing can cause bubbles, pinholes, or blisters if melting begins before all gas has escaped.</div>
+  <div class="sub-section">
+    <div class="sub-title">Substitute: Wollastonite</div>
+    <div class="sub-text">Wollastonite (CaSiO₃) supplies both CaO and SiO₂ and has no LOI gassing — a cleaner choice. Requires chemistry calculation: wollastonite brings its own SiO₂, so silica in the recipe must be reduced.</div>
+    <div class="formula-box">Whiting (CaCO₃) → Wollastonite (CaSiO₃):
+Wollastonite molecular weight ≈ 116
+Whiting molecular weight ≈ 100
+Use Insight-Live to recalculate — also reduce
+the silica in the recipe to compensate for the
+SiO₂ wollastonite contributes.</div>
+  </div>
+</div>
+
+<!-- WOLLASTONITE -->
+<div class="card" data-tags="flux silica-source">
+  <div class="card-head"><div><div class="card-title">Wollastonite</div><div class="card-alt">CaSiO₃</div></div></div>
+  <div class="tags"><span class="tag flux">flux</span><span class="tag silica-source">silica source</span></div>
+  <div class="desc" style="margin-top:0.7rem">Calcium silicate mineral — supplies both CaO and SiO₂ without any CO₂ off-gassing (no LOI). Preferred over whiting for quality glazes because it eliminates micro-bubble entrapment from carbonate decomposition. Also seeds crystal growth in high-CaO glazes during cooling. More consistent quality than mined limestone. Used in frit and stain formulations to supply CaO cleanly.</div>
+  <div class="sub-section">
+    <div class="sub-title">Substitute for Whiting</div>
+    <div class="sub-text">Not 1:1 — wollastonite brings SiO₂ that whiting does not. Must reduce silica in recipe when substituting. Chemistry calculation is essential.</div>
+    <div class="formula-box">Wollastonite supplies ~48% CaO + ~52% SiO₂
+Whiting supplies ~56% CaO only
+Always recalculate silica when substituting</div>
+  </div>
+</div>
+
+<!-- BARNARD / BLACKBIRD SLIP -->
+<div class="card" data-tags="clay colorant">
+  <div class="card-head"><div><div class="card-title">Barnard Slip</div><div class="card-alt">Blackbird Slip · Blackbird Clay</div></div></div>
+  <div class="tags"><span class="tag clay">clay</span><span class="tag colorant">colorant</span></div>
+  <div class="desc" style="margin-top:0.7rem">A highly iron-bearing silty clay (14–34% Fe₂O₃, variable) with manganese content. Fires very dark brown to near-black. Used as an economical source of iron in dark slip glazes — the clay content also aids suspension. A mixture of 90% Barnard + 20% whiting produces a nearly black glaze at cone 9. Very low plasticity, non-plastic to work with.</div>
+  <div class="sub-section">
+    <div class="sub-title">Substitute</div>
+    <div class="sub-text">Laguna SG-758 is a commercial blend substitute. Alberta Slip + Red Iron Oxide approximates the iron content. Chemistry varies significantly lot-to-lot, so testing required with any substitute.</div>
+  </div>
+</div>
+
+<!-- ALUMINA HYDRATE -->
+<div class="card" data-tags="additive">
+  <div class="card-head"><div><div class="card-title">Alumina Hydrate</div><div class="card-alt">Al(OH)₃ · Aluminum Hydroxide</div></div></div>
+  <div class="tags"><span class="tag additive">additive</span></div>
+  <div class="desc" style="margin-top:0.7rem">Alumina hydrate (gibbsite form) is used as an Al₂O₃ source and as a kiln wash ingredient. In glazes it can produce matte surfaces (crowbar matte) at lower percentages than calcined alumina, though a larger amount is required compared to calcined alumina. Hardens the glaze melt. Also used in kiln washes and as a release agent between clay and kiln shelves.</div>
+  <div class="sub-section">
+    <div class="sub-title">Substitute</div>
+    <div class="sub-text">Calcined alumina produces the same matting effect at lower percentages (more efficient). EPK or other kaolins supply Al₂O₃ to the chemistry. No 1:1 substitute — calcined alumina is preferred for efficiency.</div>
+  </div>
+</div>
+
+<!-- YELLOW OCHRE -->
+<div class="card" data-tags="colorant">
+  <div class="card-head"><div><div class="card-title">Yellow Ochre</div><div class="card-alt">Hydrated Iron Oxide · FeO(OH)</div></div></div>
+  <div class="tags"><span class="tag colorant">colorant</span></div>
+  <div class="desc" style="margin-top:0.7rem">A natural hydrated iron oxide pigment that fires tan/amber in oxidation. Lower iron concentration than red iron oxide. Contains water of crystallization (LOI) which is driven off during firing. Used in small amounts for warm tan or yellow-buff effects. Less powerful than red iron oxide but produces slightly different, sometimes softer color responses.</div>
+  <div class="sub-section">
+    <div class="sub-title">Substitute</div>
+    <div class="sub-text">Red Iron Oxide at a reduced amount (ochre contains less Fe₂O₃). Adjust by iron content — if ochre has ~50% Fe₂O₃ and red iron oxide is ~95%, use roughly half the amount of red iron oxide.</div>
+  </div>
+</div>
+
+<!-- ZINC OXIDE -->
+<div class="card" data-tags="flux">
+  <div class="card-head"><div><div class="card-title">Zinc Oxide</div><div class="card-alt">ZnO</div></div></div>
+  <div class="tags"><span class="tag flux">flux</span></div>
+  <div class="desc" style="margin-top:0.7rem">A low-expansion secondary flux. At moderate amounts it acts as a flux promoting glossy surfaces and brightening colors. At higher amounts (5%+) it promotes matte and crystalline surfaces. Produces unique color responses — with chrome it gives brown, and it can intensify stain colors. Zinc is volatile at high temperatures and can crawl if used in excess. Can cause crawling problems if the slurry has much bentonite or zircon.</div>
+  <div class="sub-section">
+    <div class="sub-title">Substitute</div>
+    <div class="sub-text">No direct substitute replicates zinc's specific color responses and crystalline promotion. Partial flux substitution with calcium or magnesium is chemically possible but changes fired character. Use chemistry software to maintain flux balance.</div>
+  </div>
+</div>
+
+<!-- MANGANESE DIOXIDE -->
+<div class="card" data-tags="colorant flux">
+  <div class="card-head"><div><div class="card-title">Manganese Dioxide</div><div class="card-alt">MnO₂</div></div></div>
+  <div class="tags"><span class="tag colorant">colorant</span><span class="tag flux">flux</span></div>
+  <div class="desc" style="margin-top:0.7rem">Produces brown, purple, and black in oxidation glazes. At 50% with a borax frit it creates an iridescent metallic glaze. Active melter — manganese itself is a flux. Gases at firing temperatures (MnO₂ → MnO + O₂), causing bubbles in the glaze if not timed correctly. Used in black glazes alongside cobalt and iron. Health caution: manganese fumes are toxic — good ventilation required.</div>
+  <div class="sub-section">
+    <div class="sub-title">Substitute</div>
+    <div class="sub-text">Iron oxide + cobalt carbonate combinations approximate some manganese glazes. Mason stain black (encapsulated) avoids the gassing/fume issue. No single substitute replicates all manganese effects.</div>
+  </div>
+</div>
+
+<!-- BORON / COLEMANITE -->
+<div class="card" data-tags="flux frit">
+  <div class="card-head"><div><div class="card-title">Boron (as raw material)</div><div class="card-alt">Colemanite · Ulexite · Gerstley Borate</div></div></div>
+  <div class="tags"><span class="tag flux">flux</span></div>
+  <div class="desc" style="margin-top:0.7rem">B₂O₃ is the most important low-expansion flux in ceramics and a required component of most functional glazes. As a raw material, boron is supplied by Gerstley Borate, Gillespie Borate, colemanite, or ulexite — all natural calcium borate minerals with significant LOI and variable chemistry. Boron lowers firing temperature, increases gloss, and is essential for low-fire glazes. Fritted boron (3134, 3124) is more consistent.</div>
+  <div class="sub-section">
+    <div class="sub-title">Substitute</div>
+    <div class="sub-text">Frits (3134, 3124, 3195) deliver boron consistently without gassing issues. Colemanite, ulexite, and Gillespie Borate are interchangeable with chemistry calculation. Gerstley Borate substitutes: Laguna Borate, Gillespie Borate (more consistent).</div>
+  </div>
+</div>
+
+<!-- EPSOM SALT -->
+<div class="card" data-tags="additive">
+  <div class="card-head"><div><div class="card-title">Epsom Salt</div><div class="card-alt">Magnesium Sulfate · MgSO₄</div></div></div>
+  <div class="tags"><span class="tag additive">additive</span></div>
+  <div class="desc" style="margin-top:0.7rem">A flocculant used to gel (thicken) glaze slurries. Added as a small pinch of powder or dissolved in water to make a glaze thixotropic — it thickens when standing and flows when stirred. Essential for slurries with insufficient clay content that run off vertical surfaces. Particularly useful for engobes and slips. Does not permanently change the chemistry; small amounts burn out in firing.</div>
+  <div class="sub-section">
+    <div class="sub-title">Substitute</div>
+    <div class="sub-text">Calcium chloride (similar flocculating effect). Vinegar (acetic acid) can also flocculate. CMC Gum for improving application properties (different mechanism — binder rather than flocculant).</div>
+  </div>
+</div>
+
+</div><!-- end grid -->
+
+<div id="no-results" style="display:none; text-align:center; padding:3rem; color:#9a8c7e;">
+  No materials found. Try a different search term.
+</div>
+</main>
+
+<script>
+let activeFilter = 'all';
+
+function setFilter(tag, btn) {
+  activeFilter = tag;
+  document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  filterCards();
+}
+
+function filterCards() {
+  const query = document.getElementById('search').value.toLowerCase();
+  const cards = document.querySelectorAll('.card');
+  let visible = 0;
+  cards.forEach(card => {
+    const tags = card.dataset.tags || '';
+    const text = card.textContent.toLowerCase();
+    const matchesFilter = activeFilter === 'all' || tags.includes(activeFilter);
+    const matchesSearch = !query || text.includes(query);
+    if (matchesFilter && matchesSearch) {
+      card.classList.remove('hidden');
+      visible++;
+    } else {
+      card.classList.add('hidden');
+    }
+  });
+  document.getElementById('no-results').style.display = visible === 0 ? 'block' : 'none';
+}
+</script>
+</body>
+</html>
